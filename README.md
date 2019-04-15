@@ -1,12 +1,12 @@
-# Setup Spring Boot & MariaDB on Amazon EC2 Linux 2 AMI
+# Setup Spring Boot (Java only) on AWS EC2 Linux 2 AMI
 
 ## Overview
 
-This project provides easy setup of an AWS EC2 Linux 2 AMI instance (on either EC2 or LightSail), which runs a Java Spring Boot JAR. The default [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) JAR provided uses an H2 in-memory database. The EC2 instance can be up and running in less than 5 minutes, and works with the [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) project, which provides a RESTful interface to a table on the DB. To get started fast, skip to the *EC2 Setup* section.
+This project provides easy setup of an AWS EC2 Linux 2 AMI instance on EC2 or Ubuntu 18 on LightSail, which runs a Java Spring Boot JAR. The default [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) JAR provided uses an H2 in-memory database. The EC2 instance can be up and running in less than 5 minutes, and works with the [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) project, which provides a RESTful interface to a table on the DB. To get started fast, skip to the *EC2 Setup* section.
 
 ## Goal
 
-The goal of this project is to demonstrate how to quickly (less than 5 minutes) launch an Amzazon Linux 2 AMI instance and configure it to run a Spring Boot executable JAR.
+The goal of this project is to demonstrate how to quickly (less than 5 minutes) launch an Amzazon Linux 2 AMI on EC2 or Ubuntu 18 on LightSail instance and configure it to run a Spring Boot executable JAR.
 
 ## Motivation
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# this install script will work on EC2 AMI in either EC2 or Lightsail
+# this install script will work on EC2 AMI in either EC2 or Ubuntu 18 in Lightsail
 
 # no need to sudo su, EC2 user-data scripts are run as root
 # update the image

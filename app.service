@@ -5,7 +5,9 @@ Description=Java Application Service
 
 [Service]
 # avoid running as root, apps that run on 80 must be run as root
-User=ec2-user
+# on AWS Linux 2, use 'ec2-user' as user, on Ubuntu 18 use 'ubuntu' as the user
+# this branch assumes Ubuntu 18 on LightSail (because it has systemd)
+User=ubuntu
 # The configuration file application.properties should be here:
 WorkingDirectory=/srv/app
 # to limit JVM ram use -Xmx512m, or the value you prefer
