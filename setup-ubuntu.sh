@@ -11,6 +11,7 @@
 # apt-get autoclean -y
 
 # install Java (OpenJDK 8)
+add-apt-repository ppa:openjdk-r/ppa -y
 apt-get install openjdk-8-jdk -y
 # setup the app location and download the jar - runs Tomcat on 8080
 mkdir /srv/app
