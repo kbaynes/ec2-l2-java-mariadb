@@ -1,4 +1,4 @@
-# Setup Spring Boot (Java only) on AWS EC2 Linux 2 AMI
+# Setup Spring Boot (Java only) on AWS EC2 Linux 2 AMI or Ubuntu 18
 
 ## Overview
 
@@ -29,7 +29,7 @@ Using the app-onstartup script it should be simple to map calls on alternate por
 To use this setup script on Amazon EC2:
 - Click Launch Instance and select the Amazon Linux 2 AMI instance (tested with 64-bit x86)
 - Select a type (tested with t2.micro: Variable ECUs, 1 vCPUs, 2.5 GHz, Intel Xeon Family, 1 GiB memory, EBS only), click Next
-- On Configure Instance Details, expand the Advanced Details section at the bottom, copy the contents of setup.sh into the User Data input field or select 'as file' and select the setup.sh file, then keep clicking Next
+- On Configure Instance Details, expand the Advanced Details section at the bottom, copy the contents of setup.sh into the User Data input field or select 'as file' and select the setup-ec2-l2.sh file, then keep clicking Next
 - On Configure Security Group: Do not use 'Default Security Group' because it does not have any open ports. Create a Security Group in EC2 and open ports 80 (web), 22 (ssh) and 3306 (mysql). The wizard on this page makes it easy if you do not already have a Security Group for these types of instances. I use MyDefaultDMZ security group which has these ports open by default.
 - Click Review and Launch, then Launch. It's easiest if you have a default SSH key pair configured so you can simply select it from the dropdown.
 
@@ -51,9 +51,9 @@ Once you're done, be sure to stop or terminate the instance so you don't run up 
 
 To use this setup script on Amazon LightSail, which is almost all on a single long scrolling page:
 - Click the 'Create Instance' button
-- Click the 'OS Only' button, and select 'Amazon Linux'
+- Click the 'OS Only' button, and select 'Ubuntu 18' (The old Amazon linux does not have systemd, so use Ubuntu)
 - Click the 'Add launch script' link to expose the launch script input text box
-- Copy the contents of the setup.sh file and paste it into the text box (modify path to the JAR if you're using your own app)
+- Copy the contents of the setup-ubuntu.sh file and paste it into the text box (modify path to the JAR if you're using your own app)
 - It should have your default key pair selected. I advise you set one up if not.
 - Choose your LightSail instance plan
 - Modify your instance ID/Name to remind yourself of what is running on this instance
