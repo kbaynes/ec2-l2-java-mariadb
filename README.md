@@ -2,11 +2,11 @@
 
 ## Overview
 
-This project provides easy setup of an AWS EC2 Linux 2 AMI instance, which runs a Java Spring Boot jar which connects to a MariaDB instance running the same server. The EC2 instance can be up and running in less than 5 minutes, and works with the [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) project, which provides a RESTful interface to a table on the DB. To get started fast, skip to the *EC2 Setup* section.
+This project provides easy setup of an AWS EC2 Linux 2 AMI instance (on either EC2 or LightSail), which runs a Java Spring Boot JAR. The default [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) JAR provided uses an H2 in-memory database. The EC2 instance can be up and running in less than 5 minutes, and works with the [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) project, which provides a RESTful interface to a table on the DB. To get started fast, skip to the *EC2 Setup* section.
 
 ## Goal
 
-The goal of this project is to demonstrate how to quickly (less than 5 minutes) launch an Amzazon Linux 2 AMI instance and configure it to run a Spring Boot executable JAR and MariaDB (MySQL).
+The goal of this project is to demonstrate how to quickly (less than 5 minutes) launch an Amzazon Linux 2 AMI instance and configure it to run a Spring Boot executable JAR.
 
 ## Motivation
 
@@ -14,7 +14,7 @@ The motivation is to have tested code to use as a basis for quickly turning up s
 
 ## Setup Overview
 
-Setup is performed via setup.sh, used during EC2 instance launching at Configure Instance Details > Advanced Details > User Data. The file can be uploaded directly, or copied and pasted as text into the input field. This script updates the image, installs MariaDB and Java, and then sets up some services. [MariaDB](https://aws.amazon.com/rds/mariadb/) is used because it is a drop in replacement for MySQL and is easy to install on the Linux 2 AMI and provides a clear path to move the data layer to other AWS services such as [Aurora](https://aws.amazon.com/rds/aurora/). [Amazon Corretto](https://aws.amazon.com/corretto/) is used because it is a no-cost OpenJDK build used and supported by Amazon, and is easily installable.
+Setup is performed via setup.sh, used during EC2 instance launching at Configure Instance Details > Advanced Details > User Data or on LightSail at the Launch Script option. The file can be uploaded directly, or copied and pasted as text into the input field. This script updates the image, installs MariaDB and Java, and then sets up some services. [MariaDB](https://aws.amazon.com/rds/mariadb/) is used because it is a drop in replacement for MySQL and is easy to install on the Linux 2 AMI and provides a clear path to move the data layer to other AWS services such as [Aurora](https://aws.amazon.com/rds/aurora/). [Amazon Corretto](https://aws.amazon.com/corretto/) is used because it is a no-cost OpenJDK build used and supported by Amazon, and is easily installable.
 
 Setup downloads four files: app.service, app-onstartup.service, app-onstartup.sh, and the [HelloWorld](https://github.com/kbaynes/docker-springboot-helloworld) Spring Boot application jar. It creates a /srv/app directory and downloads all files into that directory.
 
@@ -24,9 +24,7 @@ The app-onstartup.service runs the app-onstartup.sh shell script on startup. The
 
 Using the app-onstartup script it should be simple to map calls on alternate ports to the ssh (22) and mysql (3306) ports, then configure the security group to expose the alternate ports rather than the standard ports, for a bit of extra security.
 
-Setup also secures MariaDB by setting the root user (MariaDB root user, not system root user) user password, and limiting root access to localhost. It then removes the test user and test DB, and creates a DB called 'app_db', and a user called 'app_user', which has full access to app_db. It then creates a table called 'notes' and inserts some notes. Keep the passwords as defined or the application will fail to connect.
-
-## EC2 Setup
+## EC2 Setup Detail
 
 To use this setup script on Amazon EC2:
 - Click Launch Instance and select the Amazon Linux 2 AMI instance (tested with 64-bit x86)
@@ -48,6 +46,19 @@ Confirm that you can SSH into the instance by clicking the Connect button and us
 If you have Security Group configured and default SSH keys configured, then it should be possible have a running applicaition server in less than 5 minutes.
 
 Once you're done, be sure to stop or terminate the instance so you don't run up your AWS bill!
+
+## LightSail Setup Detail
+
+To use this setup script on Amazon LightSail, which is almost all on a single long scrolling page:
+- Click the 'Create Instance' button
+- Click the 'OS Only' button, and select 'Amazon Linux'
+- Click the 'Add launch script' link to expose the launch script input text box
+- Copy the contents of the setup.sh file and paste it into the text box (modify path to the JAR if you're using your own app)
+- It should have your default key pair selected. I advise you set one up if not.
+- Choose your LightSail instance plan
+- Modify your instance ID/Name to remind yourself of what is running on this instance
+- Add tags to remind yourself also
+
 
 ## Using and Testing the Application
 
