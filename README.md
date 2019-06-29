@@ -4,6 +4,9 @@
 
 This project provides easy setup of an AWS EC2 Linux 2 AMI instance, which runs a Java Spring Boot jar which connects to a MariaDB instance running the same server. The EC2 instance can be up and running in less than 5 minutes, and works with the [simple-spring-data-jpa-mysql](https://github.com/kbaynes/simple-spring-data-jpa-mysql) project, which provides a RESTful interface to a table on the DB. To get started fast, skip to the *EC2 Setup* section.
 
+## Branch Master
+The master branch sets up MariaDB and runs the jar. The Java-only branch does not set up MariaDB and only runs the jar.
+
 ## Goal
 
 The goal of this project is to demonstrate how to quickly (less than 5 minutes) launch an Amzazon Linux 2 AMI instance and configure it to run a Spring Boot executable JAR and MariaDB (MySQL).
